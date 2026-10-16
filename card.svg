@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="340" viewBox="0 0 600 340" role="img" aria-label="Animated terminal profile card">
+  <style>
+    .bg { fill: #0d1117; }
+    .panel { fill: #111827; stroke: #1f2937; stroke-width: 1; }
+    text { fill: #7ee787; font: 14px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .title { font-weight: 700; }
+    .portrait { font-size: 8.4px; }
+    .blink { animation: blink 1s steps(1) infinite; }
+    .late { opacity: 0; animation: show 0.01s linear forwards; animation-delay: 1.8s; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes show { to { opacity: 1; } }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="600" height="340" rx="14" ry="14"/>
+  <rect class="panel" x="18" y="18" width="350" height="304" rx="10" ry="10"/>
+  <rect class="panel" x="382" y="18" width="200" height="304" rx="10" ry="10"/>
+
+  <text class="title" x="34" y="45">terminal</text>
+  <text x="34" y="75">$ </text>
+  <g transform="translate(50,75)">
+    <text x="0" y="0">whoami</text>
+    <rect x="-1" y="-13" width="68" height="18" fill="#0d1117">
+      <animate attributeName="width" from="68" to="0" dur="1.6s" begin="0s" fill="freeze"/>
+    </rect>
+  </g>
+
+  <g class="late">
+    <text x="34" y="102">Hax // CSE @ IUS<tspan class="blink">█</tspan></text>
+  </g>
+
+  <text x="34" y="132">--------------------------------------</text>
+  <text x="34" y="157">Name ................. Hax</text>
+  <text x="34" y="180">Role ............ CSE student</text>
+  <text x="34" y="203">School ........... IUS, Dhaka</text>
+  <text x="34" y="226">Public Repos ........... <tspan id="public-repos">0</tspan></text>
+  <text x="34" y="249">Followers .............. <tspan id="public-followers">0</tspan></text>
+  <text x="34" y="274">--------------------------------------</text>
+  <text x="34" y="299">status: online</text>
+
+  <text class="portrait" x="389" y="40">
+    <tspan x="389" dy="0">.--------------------------------------.</tspan>
+    <tspan x="389" dy="14">|              .-""""-.                |</tspan>
+    <tspan x="389" dy="14">|            .'  _  _  '.              |</tspan>
+    <tspan x="389" dy="14">|           /   (o)(o)   \             |</tspan>
+    <tspan x="389" dy="14">|          |      __      |            |</tspan>
+    <tspan x="389" dy="14">|          |   .-"__"-.   |            |</tspan>
+    <tspan x="389" dy="14">|          |  /  /  \  \  |            |</tspan>
+    <tspan x="389" dy="14">|          |  \  \__/  /  |            |</tspan>
+    <tspan x="389" dy="14">|          |   '.___.'   _|            |</tspan>
+    <tspan x="389" dy="14">|          |   .-----..-".             |</tspan>
+    <tspan x="389" dy="14">|          |  /  .-.  \                |</tspan>
+    <tspan x="389" dy="14">|          |  \_/   \_/                |</tspan>
+    <tspan x="389" dy="14">|          |    abstract portrait      |</tspan>
+    <tspan x="389" dy="14">'--------------------------------------'</tspan>
+  </text>
+</svg>
