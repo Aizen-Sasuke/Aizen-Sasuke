@@ -1,0 +1,73 @@
+name: Update profile stats
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Fetch public stats
+        id: stats
+        env:
+          OWNER: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          repos="$(gh api "/users/${OWNER}" --jq '.public_repos')"
+          followers="$(gh api "/users/${OWNER}" --jq '.followers')"
+          printf 'repos=%s\n' "${repos}" >> "${GITHUB_OUTPUT}"
+          printf 'followers=%s\n' "${followers}" >> "${GITHUB_OUTPUT}"
+
+      - name: Update card.svg numbers
+        env:
+          REPOS: ${{ steps.stats.outputs.repos }}
+          FOLLOWERS: ${{ steps.stats.outputs.followers }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          card = Path("card.svg")
+          text = card.read_text(encoding="utf-8")
+          text = re.sub(
+              r'(<tspan id="public-repos">)\d+(</tspan>)',
+              rf"\g<1>{os.environ['REPOS']}\g<2>",
+              text,
+              count=1,
+          )
+          text = re.sub(
+              r'(<tspan id="public-followers">)\d+(</tspan>)',
+              rf"\g<1>{os.environ['FOLLOWERS']}\g<2>",
+              text,
+              count=1,
+          )
+          card.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Commit and push if changed
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- card.svg; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add card.svg
+          git commit -m "chore: update public profile stats"
+          git push origin "HEAD:${DEFAULT_BRANCH}"
