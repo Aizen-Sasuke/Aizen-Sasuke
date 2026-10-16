@@ -1,56 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="600" height="340" viewBox="0 0 600 340" role="img" aria-label="Animated terminal profile card">
-  <style>
-    .bg { fill: #0d1117; }
-    .panel { fill: #111827; stroke: #1f2937; stroke-width: 1; }
-    text { fill: #7ee787; font: 14px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-    .title { font-weight: 700; }
-    .portrait { font-size: 8.4px; }
-    .blink { animation: blink 1s steps(1) infinite; }
-    .late { opacity: 0; animation: show 0.01s linear forwards; animation-delay: 1.8s; }
-    @keyframes blink { 50% { opacity: 0; } }
-    @keyframes show { to { opacity: 1; } }
-  </style>
-
-  <rect class="bg" x="0" y="0" width="600" height="340" rx="14" ry="14"/>
-  <rect class="panel" x="18" y="18" width="350" height="304" rx="10" ry="10"/>
-  <rect class="panel" x="382" y="18" width="200" height="304" rx="10" ry="10"/>
-
-  <text class="title" x="34" y="45">terminal</text>
-  <text x="34" y="75">$ </text>
-  <g transform="translate(50,75)">
-    <text x="0" y="0">whoami</text>
-    <rect x="-1" y="-13" width="68" height="18" fill="#0d1117">
-      <animate attributeName="width" from="68" to="0" dur="1.6s" begin="0s" fill="freeze"/>
-    </rect>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="390" viewBox="0 0 860 390" role="img" aria-label="Animated terminal profile card for Shorif">
+  <defs>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="38"/></filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .mono { font: 15px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; fill: #7ee787; }
+      .small { font-size: 13px; }
+      .label { fill: #a9b1bd; }
+      .title { font-size: 18px; font-weight: 700; }
+      .dim { fill: #596273; }
+      .cursor { animation: blink 1s steps(1) infinite; }
+      .cmd1 { animation: type1 7.2s steps(28) infinite; }
+      .out1 { animation: reveal1 7.2s linear infinite; }
+      .cmd2 { animation: type2 7.2s steps(32) infinite; }
+      .out2 { animation: reveal2 7.2s linear infinite; }
+      .glitch-a, .glitch-b { opacity: 0; animation: glitch 6s steps(1) infinite; }
+      .glitch-a { fill: #7ee787; transform: translate(-2px,0); }
+      .glitch-b { fill: #b4a0ff; transform: translate(2px,0); animation-delay: .02s; }
+      .rain { fill: #7ee787; opacity: .1; font-size: 12px; animation: rain 9s linear infinite; }
+      .r2 { animation-delay: -2.1s; }.r3 { animation-delay: -5.4s; }.r4 { animation-delay: -7.2s; }.r5 { animation-delay: -1.4s; }.r6 { animation-delay: -6.3s; }.r7 { animation-delay: -3.7s; }.r8 { animation-delay: -8s; }.r9 { animation-delay: -4.4s; }.r10 { animation-delay: -6.9s; }.r11 { animation-delay: -2.8s; }.r12 { animation-delay: -7.8s; }
+      .emblem { transform-box: fill-box; transform-origin: center; animation: spin 12s linear infinite; }
+      .pulse { animation: pulse 8s ease-in-out infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      @keyframes type1 { 0%,8% { clip-path: inset(0 100% 0 0); } 22%,100% { clip-path: inset(0 0 0 0); } }
+      @keyframes reveal1 { 0%,24% { opacity: 0; } 30%,100% { opacity: 1; } }
+      @keyframes type2 { 0%,39% { clip-path: inset(0 100% 0 0); } 55%,100% { clip-path: inset(0 0 0 0); } }
+      @keyframes reveal2 { 0%,57% { opacity: 0; } 63%,100% { opacity: 1; } }
+      @keyframes glitch { 0%,94%,100% { opacity: 0; } 95%,97% { opacity: .85; } }
+      @keyframes rain { from { transform: translateY(-150px); } to { transform: translateY(410px); } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes pulse { 0%,78%,100% { opacity: 1; } 82% { opacity: .35; } 86% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .rain, .glitch-a, .glitch-b, .emblem, .pulse, .cursor, .cmd1, .cmd2, .out1, .out2 { animation-play-state: paused; } }
+    </style>
+  </defs>
+  <rect width="860" height="390" rx="22" fill="#0b0d12"/>
+  <rect x=".5" y=".5" width="859" height="389" rx="21.5" fill="none" stroke="rgba(180,160,255,0.25)"/>
+  <circle cx="150" cy="50" r="145" fill="#b4a0ff" opacity=".16" filter="url(#blur)"/>
+  <circle cx="745" cy="320" r="165" fill="#7ee787" opacity=".12" filter="url(#blur)"/>
+  <g class="rain mono" aria-hidden="true">
+    <text x="42" class="r1">ﾊ 7 ﾐ 0 ｶ 1</text><text x="110" class="r2">0 ｼ 3 ﾂ 9 ｱ</text><text x="178" class="r3">ﾕ 4 ﾛ 8 ｾ 2</text><text x="246" class="r4">6 ﾅ ｦ 1 ﾍ 5</text>
+    <text x="314" class="r5">ﾓ 3 ﾘ 7 0 ｸ</text><text x="382" class="r6">9 ﾀ ｷ 2 ﾇ 4</text><text x="450" class="r7">ｻ 8 ﾎ 6 ｲ 0</text><text x="518" class="r8">1 ﾑ 5 ﾁ ﾔ 9</text>
+    <text x="586" class="r9">ﾈ 2 ﾌ 7 ﾖ 3</text><text x="654" class="r10">4 ｴ 0 ﾂ 8 ｽ</text><text x="722" class="r11">ﾋ 6 ﾒ 1 ﾄ 5</text><text x="790" class="r12">7 ｸ 9 ﾇ 2 ﾏ</text>
   </g>
-
-  <g class="late">
-    <text x="34" y="102">Hax // CSE @ IUS<tspan class="blink">█</tspan></text>
+  <g class="mono">
+    <text class="title" x="42" y="48">terminal</text>
+    <circle cx="790" cy="42" r="5" fill="#7ee787" opacity=".8"/><text class="small dim" x="804" y="47">online</text>
+    <text x="42" y="91">$ <tspan class="cmd1">whoami</tspan><tspan class="cursor">█</tspan></text>
+    <text class="out1" x="42" y="119">Shorif // CSE @ IUS</text>
+    <text x="42" y="155">$ <tspan class="cmd2">ls projects/</tspan><tspan class="cursor">█</tspan></text>
+    <text class="out2" x="42" y="183">etcha/  garden-of-knowledge/  aidash/  fuel/</text>
+    <line x1="42" y1="212" x2="565" y2="212" stroke="#2b3240"/>
+    <g class="small">
+      <text class="label" x="42" y="240">Name</text><text class="dim" x="105" y="240">........................</text><text x="300" y="240">Shorif</text>
+      <text class="label" x="42" y="266">Role</text><text class="dim" x="105" y="266">.........................</text><text x="300" y="266">CSE student</text>
+      <text class="label" x="42" y="292">School</text><text class="dim" x="105" y="292">........................</text><text x="300" y="292">IUS, Dhaka</text>
+      <text class="label" x="42" y="326">Public Repos</text><text class="dim" x="155" y="326">................</text><text id="public-repos" x="300" y="326" text-anchor="end">0</text>
+      <text class="label" x="360" y="326">Followers</text><text class="dim" x="430" y="326">...............</text><text id="public-followers" x="565" y="326" text-anchor="end">0</text>
+    </g>
   </g>
-
-  <text x="34" y="132">--------------------------------------</text>
-  <text x="34" y="157">Name ................. Hax</text>
-  <text x="34" y="180">Role ............ CSE student</text>
-  <text x="34" y="203">School ........... IUS, Dhaka</text>
-  <text x="34" y="226">Public Repos ........... <tspan id="public-repos">0</tspan></text>
-  <text x="34" y="249">Followers .............. <tspan id="public-followers">0</tspan></text>
-  <text x="34" y="274">--------------------------------------</text>
-  <text x="34" y="299">status: online</text>
-
-  <text class="portrait" x="389" y="40">
-    <tspan x="389" dy="0">.--------------------------------------.</tspan>
-    <tspan x="389" dy="14">|              .-""""-.                |</tspan>
-    <tspan x="389" dy="14">|            .'  _  _  '.              |</tspan>
-    <tspan x="389" dy="14">|           /   (o)(o)   \             |</tspan>
-    <tspan x="389" dy="14">|          |      __      |            |</tspan>
-    <tspan x="389" dy="14">|          |   .-"__"-.   |            |</tspan>
-    <tspan x="389" dy="14">|          |  /  /  \  \  |            |</tspan>
-    <tspan x="389" dy="14">|          |  \  \__/  /  |            |</tspan>
-    <tspan x="389" dy="14">|          |   '.___.'   _|            |</tspan>
-    <tspan x="389" dy="14">|          |   .-----..-".             |</tspan>
-    <tspan x="389" dy="14">|          |  /  .-.  \                |</tspan>
-    <tspan x="389" dy="14">|          |  \_/   \_/                |</tspan>
-    <tspan x="389" dy="14">|          |    abstract portrait      |</tspan>
-    <tspan x="389" dy="14">'--------------------------------------'</tspan>
-  </text>
+  <g transform="translate(704 190)" class="pulse" filter="url(#glow)">
+    <g class="emblem" fill="none" stroke="#7ee787" stroke-width="4">
+      <circle r="82" opacity=".7"/><circle r="56" opacity=".35" stroke="#b4a0ff"/>
+      <circle r="13" fill="#7ee787" stroke="none"/><circle r="5" fill="#0b0d12" stroke="none"/>
+      <g fill="#7ee787" stroke="none">
+        <path d="M0-52 C18-46 23-29 12-16 C6-9 0-13 0-24Z"/>
+        <path d="M45 26 C38 44 21 51 10 38 C4 31 8 26 19 23Z" transform="rotate(120)"/>
+        <path d="M45 26 C38 44 21 51 10 38 C4 31 8 26 19 23Z" transform="rotate(240)"/>
+      </g>
+    </g>
+  </g>
+  <g class="mono" aria-hidden="true"><text x="662" y="313" class="small dim">signal / sage</text><text x="662" y="334" class="small dim">id: shorif</text></g>
+  <g aria-hidden="true" font-family="ui-monospace, monospace" font-size="28" font-weight="700">
+    <text x="42" y="375" fill="#7ee787" class="glitch-a">Shorif</text><text x="42" y="375" fill="#b4a0ff" class="glitch-b">Shorif</text>
+  </g>
 </svg>
